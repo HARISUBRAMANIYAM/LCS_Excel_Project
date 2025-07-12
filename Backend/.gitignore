@@ -210,3 +210,6 @@ __pycache__
 *.xlsx
 *.pdf
 processed_esi
+Backend\myvenv
+*.cfg
+/myvenv
