@@ -96,153 +96,6 @@ const AdminRegisterForm: React.FC = () => {
   };
 
   return (
-    // <>
-    //   <ToastContainer
-    //     position="top-right"
-    //     autoClose={3000}
-    //     hideProgressBar={false}
-    //     newestOnTop={false}
-    //     closeOnClick
-    //     rtl={false}
-    //     pauseOnFocusLoss
-    //     draggable
-    //     pauseOnHover
-    //     theme="colored"
-    //   />
-
-    //   <form onSubmit={handleSubmit} className="auth-form-container upload-form">
-    //     {errors.length > 0 && (
-    //       <div className="error-text mb-2">
-    //         {errors.map((err, idx) => (
-    //           <p key={idx}>{err}</p>
-    //         ))}
-    //       </div>
-    //     )}
-
-    //     <h2 className="dashboard-title">Admin Register</h2>
-    //     <div className="form-row">
-    //       <div className="form-group">
-    //         <input
-    //           name="username"
-    //           placeholder="Username"
-    //           value={formData.username}
-    //           onChange={handleChange}
-    //           required
-    //         />
-    //         {errors.filter((err) => err.startsWith("username")).length > 0 && (
-    //           <span
-    //             className="error-text"
-    //             style={{ color: "red", fontSize: "0.8em" }}>
-    //             {errors.filter((err) => err.startsWith("username"))[0]}
-    //           </span>
-    //         )}
-    //       </div>
-
-    //       <div className="form-group">
-    //         <input
-    //           name="password"
-    //           placeholder="Password"
-    //           type="password"
-    //           value={formData.password}
-    //           onChange={handleChange}
-    //           required
-    //           minLength={6}
-    //         />
-    //         {errors.filter((err) => err.startsWith("password")).length > 0 && (
-    //           <span
-    //             className="error-text"
-    //             style={{ color: "red", fontSize: "0.8em" }}>
-    //             {errors.filter((err) => err.startsWith("password"))[0]}
-    //           </span>
-    //         )}
-    //       </div>
-
-    //       <div className="form-group">
-    //         <input
-    //           name="email"
-    //           placeholder="Email"
-    //           type="email"
-    //           value={formData.email}
-    //           onChange={handleChange}
-    //           required
-    //         />
-    //         {errors.filter((err) => err.startsWith("email")).length > 0 && (
-    //           <span
-    //             className="error-text"
-    //             style={{ color: "red", fontSize: "0.8em" }}>
-    //             {errors.filter((err) => err.startsWith("email"))[0]}
-    //           </span>
-    //         )}
-    //       </div>
-
-    //       <div className="form-group">
-    //         <input
-    //           name="full_name"
-    //           placeholder="Full Name"
-    //           value={formData.full_name}
-    //           onChange={handleChange}
-    //           required
-    //         />
-    //         {errors.filter((err) => err.startsWith("full_name")).length > 0 && (
-    //           <span
-    //             className="error-text"
-    //             style={{ color: "red", fontSize: "0.8em" }}>
-    //             {errors.filter((err) => err.startsWith("full_name"))[0]}
-    //           </span>
-    //         )}
-    //       </div>
-
-    //       <div className="form-group">
-    //         <select
-    //           name="role"
-    //           value={formData.role}
-    //           onChange={handleChange}
-    //           required
-    //           aria-label="Select user role">
-    //           {errors.filter((err) => err.startsWith("role")).length > 0 && (
-    //             <span
-    //               className="error-text"
-    //               style={{ color: "red", fontSize: "0.8em" }}>
-    //               {errors.filter((err) => err.startsWith("role"))[0]}
-    //             </span>
-    //           )}
-    //           <option value={Role.Select}>Select Role</option>
-    //           <option value={Role.HR}>HR</option>
-    //           <option value={Role.ADMIN}>Admin</option>
-    //         </select>
-    //       </div>
-
-    //       <div className="form-group">
-    //         <label>
-    //           <input
-    //             name="disabled"
-    //             type="checkbox"
-    //             checked={formData.disabled}
-    //             onChange={handleChange}
-    //             className="mr-3"
-    //           />
-    //           Account Disabled
-    //         </label>
-    //       </div>
-    //       <div className="form-actions">
-    //         <button
-    //           type="submit"
-    //           disabled={loading}
-    //           className="submit-btn">
-    //           {loading ? "Registering..." : "Register User"}
-    //         </button>
-    //         <br />
-    //         <button
-    //           type="button"
-    //           disabled={loading}
-    //           className="submit-btn"
-    //           onClick={handlereset}>
-    //           Cancel
-    //         </button>
-    //       </div>
-    //     </div>
-    //   </form>
-    // </>
     <form onSubmit={handleSubmit} className="auth-form-container upload-form">
       {errors.length > 0 && (
         <div className="error-text mb-2">
@@ -336,21 +189,22 @@ const AdminRegisterForm: React.FC = () => {
           )}
         </div>
 
-        <div className="form-group full-width">
-          <label>
-            <input
-              name="disabled"
-              type="checkbox"
-              checked={formData.disabled}
-              onChange={handleChange}
-              className="mr-3"
-            />
+        <div className="form-group full-width"
+        style={{display:"flex" , alignItems: "center", gap: "0.5rem" }}>
+          <label
+          style={{marginRight:"136px",textWrap:"nowrap"}}>
             Account Disabled
           </label>
+           <input
+              name="disabled"
+              type="checkbox"
+              placeholder="Account Disabled"
+              checked={formData.disabled}
+              onChange={handleChange}
+            />
         </div>
       </div>
 
-      {/* ✅ Moved outside of form-row */}
       <div className="form-actions">
         <button type="submit" disabled={loading} className="submit-btn">
           {loading ? "Registering..." : "Register User"}

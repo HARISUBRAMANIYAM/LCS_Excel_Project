@@ -5,27 +5,19 @@ import { SelectButton } from 'primereact/selectbutton';
 import { Message } from 'primereact/message';
 import { Skeleton } from 'primereact/skeleton';
 import api from '../../services/api';
-import {  type MonthToNumberMap, type SelectButtonChangeEvent, type SubmissionTimelineProps, type UploadDay, type ViewOption } from './DashBoardInterface';
-import  {type TimelineDataPoint}  from './DashBoardInterface';
+import { type SelectButtonChangeEvent, type SubmissionTimelineProps, type UploadDay } from '../../interface/DashboardModule';
+import { type TimelineDataPoint } from '../../interface/DashboardModule';
+import { monthLabels, monthToNumber, viewOptions } from '../../interface/DashboardModule';
 
-const SubmissionTimeline:React.FC<SubmissionTimelineProps> = ({ year }) => {
+const SubmissionTimeline: React.FC<SubmissionTimelineProps> = ({ year }) => {
   const [view, setView] = useState<'pf' | 'esi'>('pf');
-  const [pfData, setPfData] = useState<TimelineDataPoint []>([]);
-  const [esiData, setEsiData] = useState<TimelineDataPoint []>([]);
+  const [pfData, setPfData] = useState<TimelineDataPoint[]>([]);
+  const [esiData, setEsiData] = useState<TimelineDataPoint[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const viewOptions:ViewOption[] = [
-    { label: 'PF', value: 'pf' },
-    { label: 'ESI', value: 'esi' }
-  ];
 
-  const monthToNumber:MonthToNumberMap = {
-    January: 1, February: 2, March: 3, April: 4, May: 5, June: 6,
-    July: 7, August: 8, September: 9, October: 10, November: 11, December: 12
-  };
 
-  const monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
   useEffect(() => {
     fetchTimelineData();
@@ -35,8 +27,8 @@ const SubmissionTimeline:React.FC<SubmissionTimelineProps> = ({ year }) => {
     try {
       setLoading(true);
       const response = await api.get(`/dashboard/uploads/by-year-days?year=${year}`);
-      
-      const mapData = (data:UploadDay[]):TimelineDataPoint[] => 
+
+      const mapData = (data: UploadDay[]): TimelineDataPoint[] =>
         data.map(item => ({
           x: monthToNumber[item.month],
           y: parseInt(item.day.toString()),
@@ -47,14 +39,14 @@ const SubmissionTimeline:React.FC<SubmissionTimelineProps> = ({ year }) => {
       setPfData(mapData(response.data.pf || []));
       setEsiData(mapData(response.data.esi || []));
       setError(null);
-    } catch (err:any) {
+    } catch (err: any) {
       setError(err.message || 'Failed to fetch timeline data');
     } finally {
       setLoading(false);
     }
   };
 
-  const getChartData = (data:TimelineDataPoint[], label:string, color:string):any => {
+  const getChartData = (data: TimelineDataPoint[], label: string, color: string): any => {
     return {
       labels: monthLabels,
       datasets: [
@@ -88,11 +80,11 @@ const SubmissionTimeline:React.FC<SubmissionTimelineProps> = ({ year }) => {
       },
       title: {
         display: true,
-        text: `${view.toUpperCase()} Submission Timeline - ${year}`
+        text: `${view ? "PF" :"ESI"}Submission Timeline - ${year}`
       },
       tooltip: {
         callbacks: {
-          label: function(context:any) {
+          label: function (context: any) {
             if (context.datasetIndex === 0) {
               const dataPoint = context.raw;
               return `${dataPoint.y} ${monthLabels[dataPoint.x - 1]}`;
@@ -110,7 +102,7 @@ const SubmissionTimeline:React.FC<SubmissionTimelineProps> = ({ year }) => {
         max: 12,
         ticks: {
           stepSize: 1,
-          callback: function(value:any) {
+          callback: function (value: any) {
             return monthLabels[value - 1];
           }
         },
@@ -153,7 +145,8 @@ const SubmissionTimeline:React.FC<SubmissionTimelineProps> = ({ year }) => {
     `${view.toUpperCase()} Submission`,
     view === 'pf' ? '#8884d8' : '#82ca9d'
   );
-const handleViewChange = (e: SelectButtonChangeEvent): void => {
+  const handleViewChange = (e: SelectButtonChangeEvent): void => {
+    console.log(e.value)
     setView(e.value);
   };
   return (
@@ -165,7 +158,7 @@ const handleViewChange = (e: SelectButtonChangeEvent): void => {
         <div className="col-md-6">
           <SelectButton
             value={view}
-            onChange={() =>handleViewChange}
+            onChange={(e) => setView(e.value)}
             options={viewOptions}
             className="float-end"
           />
@@ -175,18 +168,18 @@ const handleViewChange = (e: SelectButtonChangeEvent): void => {
       <Card className="timeline-card">
         {currentData.length > 0 ? (
           <div className="chart-container" style={{ height: '400px' }}>
-            <Chart 
-              type="line" 
-              data={chartData} 
+            <Chart
+              type="line"
+              data={chartData}
               options={chartOptions}
               height="400px"
             />
           </div>
         ) : (
           <div className="no-data-message">
-            <Message 
-              severity="info" 
-              text={`No ${view.toUpperCase()} submission data available for ${year}`} 
+            <Message
+              severity="info"
+              text={`No ${view.toUpperCase()} submission data available for ${year}`}
             />
           </div>
         )}

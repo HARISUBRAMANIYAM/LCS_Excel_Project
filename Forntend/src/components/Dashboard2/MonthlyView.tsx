@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from 'primereact/card';
 import { Chart } from 'primereact/chart';
-import type { MonthlyOverviewProps } from './DashBoardInterface';
+import type { MonthlyOverviewProps } from '../../interface/DashboardModule';
 
 const MonthlyOverview :React.FC<MonthlyOverviewProps> =({ data, summaryStats, formatCurrency }) => {
   if (!data || !summaryStats) {

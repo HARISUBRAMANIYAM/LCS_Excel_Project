@@ -6,7 +6,7 @@ import { Skeleton } from "primereact/skeleton";
 import { TabPanel, TabView } from "primereact/tabview";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
-import type { CurrentMonthData, MonthlyAmounts, MonthOption, SummaryCardData, SummaryStatsResponse, TabChangeEvent, YearOption } from "./DashBoardInterface";
+import { months, type CurrentMonthData, type MonthlyAmounts,  type SummaryCardData, type SummaryStatsResponse, type TabChangeEvent, type YearOption } from "../../interface/DashboardModule";
 import DelayedSubmissions from "./DelayedSubmission";
 import MonthlyOverview from "./MonthlyView";
 import SubmissionTimeline from "./SubmissionTimeline";
@@ -15,7 +15,6 @@ const RemittanceDashboard = () => {
   const [summaryStats, setSummaryStats] = useState<SummaryStatsResponse | null>(
     null
   );
-  // const [monthlyAmountData, setMonthlyAmountData] = useState<MonthlyAmounts[]>([]);
   const [monthlyAmountData, setMonthlyAmountData] = useState<MonthlyAmounts>({
   labels: [],
   datasets: {
@@ -30,21 +29,7 @@ const RemittanceDashboard = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const months :MonthOption[] = [
-    { label: "All Months", value: -1 },
-    { label: "Apr", value: 0 },
-    { label: "May", value: 1 },
-    { label: "Jun", value: 2 },
-    { label: "Jul", value: 3 },
-    { label: "Aug", value: 4 },
-    { label: "Sep", value: 5 },
-    { label: "Oct", value: 6 },
-    { label: "Nov", value: 7 },
-    { label: "Dec", value: 8 },
-    { label: "Jan", value: 9 },
-    { label: "Feb", value: 10 },
-    { label: "Mar", value: 11 },
-  ];
+  
 
   useEffect(() => {
     fetchData();
@@ -218,9 +203,9 @@ const handleYearChange = (e: DropdownChangeEvent): void => {
       {/* Summary Cards */}
       <div className="row mb-4">
         {getSummaryCardData().map((card, index) => (
-          <div key={index} className="col-md-3 mb-3">
-            <Card className={`summary-card ${card.className}`}>
-              <div className="card-header">
+          <div key={index} className="col-md-3 mb-3 d-flex">
+            <Card style={{ width: '100%', height: '220px' }} className={`summary-card ${card.className}`}>
+              <div className="card-header" style={{borderRadius:"7px"}}>
                 <h6 className="card-title">{card.title}</h6>
               </div>
               <div className="card-body">
@@ -236,12 +221,12 @@ const handleYearChange = (e: DropdownChangeEvent): void => {
                     <span className="summary-value">{card.avg}</span>
                   </div>
                 )}
-                {card.submissions && (
+                {/* {card.submissions && (
                   <div className="summary-item">
                     <span className="summary-label">Submissions:</span>
                     <span className="summary-value">{card.submissions}</span>
                   </div>
-                )}
+                )} */}
                 {card.onTimeRate && (
                   <div className="summary-item">
                     <span className="summary-label">On-Time Rate:</span>

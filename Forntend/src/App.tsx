@@ -16,6 +16,8 @@ import { AuthProvider, useAuth } from "./context/AuthContext";
 import Dashboard from "./components/Dashboard2/Dashboard";
 import 'chart.js/auto';
 import ProtectedRoute from "./components/Error/ProtectedRoute";
+import FeedbackForm from "./components/Feedback/Email";
+import { ThemeProvider } from "./components/Theme/ThemeProvider";
 
 const AppRoutes = () => {
   const { user } = useAuth();
@@ -43,19 +45,19 @@ const AppRoutes = () => {
           <Route
             path="/dashboard"
             element={
-                // <ProtectedRoute>
-                //     <Dashboard />
-                // </ProtectedRoute>
-                <Dashboard/>
+                <ProtectedRoute>
+                    <Dashboard />
+                </ProtectedRoute>
+                // <Dashboard/>
             }
             // element={<Dashboard />}
           />
           <Route path="/admin-reg" element={<AdminRegisterForm />} />
-          <Route path="/new" element={<ExcelUpload />} />
-          {/* element={<ProtectedRoute><ExcelUpload /></ProtectedRoute>} /> */}
-          <Route path="/table" element={<RemittanceFilesList />} />
-          {/* // element={<ProtectedRoute><RemittanceFilesList /></ProtectedRoute>} /> */}
-          {/* <Route path='/feedback' element={<ProtectedRoute><FeedbackForm /></ProtectedRoute>} /> */}
+          <Route path="/new"  //element={<ExcelUpload />} />
+          element={<ProtectedRoute><ExcelUpload /></ProtectedRoute>} />
+          <Route path="/table" //element={<RemittanceFilesList />} />
+           element={<ProtectedRoute><RemittanceFilesList /></ProtectedRoute>} /> 
+          <Route path='/feedback' element={<ProtectedRoute><FeedbackForm /></ProtectedRoute>} />
           <Route path="/change_pass" element={<PasswordForm />} />
           <Route
             path="/"
@@ -69,6 +71,8 @@ const AppRoutes = () => {
 
 const App: React.FC = () => {
   return (
+    <ThemeProvider>
+
     <AuthProvider>
       <Router>
         <Layout>
@@ -76,6 +80,8 @@ const App: React.FC = () => {
         </Layout>
       </Router>
     </AuthProvider>
+    </ThemeProvider>
+
   );
 };
 

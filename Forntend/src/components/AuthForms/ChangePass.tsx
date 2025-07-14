@@ -2,16 +2,13 @@ import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { useAuth } from "../../context/AuthContext";
 import { API_BASE_URL } from "../../services/api";
-import "./Auth.scss";
+import type { changePasswordData } from "../../interface/AuthFormModule";
+import { useTheme } from "../Theme/ThemeContext";
 
-interface changePasswordData {
-  username: string;
-  current_password: string;
-  new_password: string;
-  confirm_password: string;
-}
+
 const PasswordForm: React.FC = () => {
   const { token, logout } = useAuth();
+  const { theme } = useTheme();
   const [formData, setFormData] = useState<changePasswordData>({
     username: "",
     current_password: "",
@@ -45,7 +42,7 @@ const PasswordForm: React.FC = () => {
 
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE_URL}/change_pass`, {
+      const response = await fetch(`${API_BASE_URL}auth/change_password`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -82,9 +79,16 @@ const PasswordForm: React.FC = () => {
       setLoading(false);
     }
   };
-
+  const handleClear = ()=>{
+    setFormData({
+        username: "",
+        current_password: "",
+        new_password: "",
+        confirm_password: "",
+      });
+  }
   return (
-    <div className="auth-form-container">
+    <div className={`auth-form-container ${theme}`}>
       <ToastContainer position="top-right" />
       {/* <h2>Change Password</h2> */}
       <form onSubmit={handleSubmit} className="auth-form">
@@ -145,6 +149,12 @@ const PasswordForm: React.FC = () => {
         >
           {loading ? "Changing..." : "Change Password"}
         </button>
+        <button
+         type="button"
+         disabled={loading}
+         className="login-button"
+         onClick={handleClear}
+         >Clear All</button>
         </div>
         
       </form>
