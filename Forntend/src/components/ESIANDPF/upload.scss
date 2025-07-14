@@ -1,0 +1,87 @@
+@import "../../assets/style/main.scss";
+
+.form-group.full-width {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    
+    // File count indicator
+    &::after {
+      content: " (" attr(data-file-count) ")";
+      color: var(--text-muted);
+      font-weight: normal;
+    }
+  }
+
+  .file-upload-wrapper {
+    position: relative;
+    border: 2px dashed var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: 2rem;
+    text-align: center;
+    transition: all var(--transition-fast);
+    background-color: var(--bg-primary);
+    cursor: pointer;
+
+    &:hover {
+      border-color: var(--bg-accent);
+      background-color: rgba(var(--bg-accent), 0.05);
+    }
+
+    .file-upload-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      color: var(--text-muted);
+
+      i {
+        font-size: 2.5rem;
+        color: var(--bg-tertiary);
+      }
+
+      p {
+        margin: 0;
+        font-size: 1rem;
+      }
+    }
+
+    input[type="file"] {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+  }
+
+  .folder-info {
+    display: block;
+    margin-top: 0.75rem;
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 0.85rem;
+
+    &::before {
+      content: "✓ ";
+      color: var(--color-success);
+    }
+  }
+
+  .p-message-error {
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    background-color: rgba(var(--color-danger), 0.1);
+    color: var(--color-danger);
+    border-radius: var(--border-radius-sm);
+    border-left: 3px solid var(--color-danger);
+    font-size: 0.9rem;
+  }
+}

@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { useAuth } from "../../context/AuthContext";
 import api from "../../services/api";
 import { Role } from "../../types";
-
+import "./Auth.scss";
 const AuthForm: React.FC = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
@@ -139,99 +139,241 @@ const AuthForm: React.FC = () => {
     });
   };
 
+  // return (
+  //   <div className="auth-form-container">
+  //     <h2>{isLogin ? "Login" : "Register"}</h2>
+  //     {error && (
+  //       <div className="error-message">
+  //         {error.split("\n").map((line, i) => (
+  //           <div key={i}>{line}</div>
+  //         ))}
+  //       </div>
+  //     )}
+  //     <form onSubmit={handleSubmit} className="auth-form w-100">
+  //       <div className="form-group">
+  //         <label htmlFor="username">Username</label>
+  //         <input
+  //           id="username"
+  //           name="username"
+  //           type="text"
+  //           value={formData.username}
+  //           onChange={handleChange}
+  //           required
+  //           placeholder="Enter Username"
+  //           minLength={4}
+  //           maxLength={50}
+  //           className="w-100"
+  //           autoComplete="username"
+  //         />
+  //       </div>
+
+  //       <div className="form-group w-100">
+  //         <label htmlFor="password">Password</label>
+  //         <input
+  //           id="password"
+  //           name="password"
+  //           type="password"
+  //           value={formData.password}
+  //           onChange={handleChange}
+  //           required
+  //           placeholder="Enter Password"
+  //           minLength={6}
+  //           maxLength={100}
+  //           className="w-100"
+  //           autoComplete={isLogin ? "current-password" : "new-password"}
+  //         />
+  //       </div>
+
+  //       {!isLogin && (
+  //         <>
+  //           <div className="form-group">
+  //             <label htmlFor="email">Email</label>
+  //             <input
+  //               id="email"
+  //               name="email"
+  //               type="email"
+  //               value={formData.email}
+  //               onChange={handleChange}
+  //               placeholder="Enter Email Id"
+  //               required
+  //               autoComplete="email"
+  //             />
+  //           </div>
+
+  //           <div className="form-group">
+  //             <label htmlFor="fullName">Full Name</label>
+  //             <input
+  //               id="fullName"
+  //               name="fullName"
+  //               type="text"
+  //               value={formData.fullName}
+  //               onChange={handleChange}
+  //               placeholder="Enter Your Full Name"
+  //               required
+  //               autoComplete="name"
+  //             />
+  //           </div>
+
+  //           <div className="form-group" style={{ width: "106%" }}>
+  //             <label htmlFor="role">Role</label>
+  //             <select
+  //               id="role"
+  //               name="role"
+  //               value={formData.role}
+  //               onChange={handleChange}>
+  //               <option value={Role.Select}>Select Role </option>
+  //               <option value={Role.HR}>HR</option>
+  //               <option value={Role.ADMIN}>Admin</option>
+  //             </select>
+  //           </div>
+  //         </>
+  //       )}
+
+  //       <button
+  //         type="submit"
+  //         className="submit-button mb-3 w-60"
+  //         disabled={
+  //           loading ||
+  //           (isLogin
+  //             ? !formData.username || !formData.password
+  //             : !formData.username ||
+  //               !formData.password ||
+  //               !formData.email ||
+  //               !formData.fullName)
+  //         }>
+  //         {loading ? (
+  //           <>
+  //             <span className="spinner"></span>
+  //             {isLogin ? "Logging in..." : "Registering..."}
+  //           </>
+  //         ) : isLogin ? (
+  //           "Login"
+  //         ) : (
+  //           "Register"
+  //         )}
+  //       </button>
+  //       <button
+  //         type="button"
+  //         className="submit-button w-60"
+  //         onClick={handlereset}
+  //         disabled={loading}>
+  //         Cancel
+  //       </button>
+
+  //       <p className="auth-toggle">
+  //         {isLogin ? "Don't have an account? " : "Already have an account? "}
+  //         <button
+  //           type="button"
+  //           className="toggle-button"
+  //           onClick={toggleAuthMode}
+  //           disabled={loading}>
+  //           {isLogin ? "Register" : "Login"}
+  //         </button>
+  //       </p>
+  //     </form>
+  //   </div>
+  // );
   return (
-    <div className="auth-form-container">
-      <h2>{isLogin ? "Login" : "Register"}</h2>
-      {error && (
-        <div className="error-message">
-          {error.split("\n").map((line, i) => (
-            <div key={i}>{line}</div>
-          ))}
-        </div>
+  <div className="auth-form-container">
+  <h2 className="dashboard-title">{isLogin ? "Login" : "Register"}</h2>
+
+  {error && (
+    <div className="p-message p-message-error mb-3">
+      {error.split("\n").map((line, i) => (
+        <div key={i}>{line}</div>
+      ))}
+    </div>
+  )}
+
+  <form onSubmit={handleSubmit} className="auth-form w-100">
+    <div className="row">
+      <div className="col-md-12 mb-3">
+        <label htmlFor="username">Username</label>
+        <input
+          id="username"
+          name="username"
+          type="text"
+          className="form-control"
+          value={formData.username}
+          onChange={handleChange}
+          required
+          placeholder="Enter Username"
+          minLength={4}
+          maxLength={50}
+          autoComplete="username"
+        />
+      </div>
+      </div>
+    <div className="row">
+      <div className="col-md-12 mb-3">
+        <label htmlFor="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          className="form-control"
+          value={formData.password}
+          onChange={handleChange}
+          required
+          placeholder="Enter Password"
+          minLength={6}
+          maxLength={100}
+          autoComplete={isLogin ? "current-password" : "new-password"}
+        />
+      </div>
+
+      {!isLogin && (
+        <>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              className="form-control"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              placeholder="Enter Email Id"
+              autoComplete="email"
+            />
+          </div>
+
+          <div className="col-md-6 mb-3">
+            <label htmlFor="fullName">Full Name</label>
+            <input
+              id="fullName"
+              name="fullName"
+              type="text"
+              className="form-control"
+              value={formData.fullName}
+              onChange={handleChange}
+              placeholder="Enter Your Full Name"
+              required
+              autoComplete="name"
+            />
+          </div>
+
+          <div className="col-12 mb-3">
+            <label htmlFor="role">Role</label>
+            <select
+              id="role"
+              name="role"
+              className="form-control"
+              value={formData.role}
+              onChange={handleChange}>
+              <option value={Role.Select}>Select Role</option>
+              <option value={Role.HR}>HR</option>
+              <option value={Role.ADMIN}>Admin</option>
+            </select>
+          </div>
+        </>
       )}
-      <form onSubmit={handleSubmit} className="auth-form w-100">
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            id="username"
-            name="username"
-            type="text"
-            value={formData.username}
-            onChange={handleChange}
-            required
-            placeholder="Enter Username"
-            minLength={4}
-            maxLength={50}
-            className="w-100"
-            autoComplete="username"
-          />
-        </div>
 
-        <div className="form-group w-100">
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            placeholder="Enter Password"
-            minLength={6}
-            maxLength={100}
-            className="w-100"
-            autoComplete={isLogin ? "current-password" : "new-password"}
-          />
-        </div>
-
-        {!isLogin && (
-          <>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Enter Email Id"
-                required
-                autoComplete="email"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="fullName">Full Name</label>
-              <input
-                id="fullName"
-                name="fullName"
-                type="text"
-                value={formData.fullName}
-                onChange={handleChange}
-                placeholder="Enter Your Full Name"
-                required
-                autoComplete="name"
-              />
-            </div>
-
-            <div className="form-group" style={{ width: "106%" }}>
-              <label htmlFor="role">Role</label>
-              <select
-                id="role"
-                name="role"
-                value={formData.role}
-                onChange={handleChange}>
-                <option value={Role.Select}>Select Role </option>
-                <option value={Role.HR}>HR</option>
-                <option value={Role.ADMIN}>Admin</option>
-              </select>
-            </div>
-          </>
-        )}
-
+      <div className="col-12 d-flex justify-content-center gap-3 mt-3">
         <button
           type="submit"
-          className="submit-button mb-3 w-60"
+          className="login-button"
           disabled={
             loading ||
             (isLogin
@@ -243,7 +385,7 @@ const AuthForm: React.FC = () => {
           }>
           {loading ? (
             <>
-              <span className="spinner"></span>
+              <span className="loading-spinner me-2" />
               {isLogin ? "Logging in..." : "Registering..."}
             </>
           ) : isLogin ? (
@@ -252,27 +394,34 @@ const AuthForm: React.FC = () => {
             "Register"
           )}
         </button>
+
         <button
           type="button"
-          className="submit-button w-60"
+          className="login-button"
           onClick={handlereset}
           disabled={loading}>
           Cancel
         </button>
+      </div>
 
+      <div className="col-12 text-center mt-4">
         <p className="auth-toggle">
           {isLogin ? "Don't have an account? " : "Already have an account? "}
           <button
             type="button"
-            className="toggle-button"
+            className="logout-button"
             onClick={toggleAuthMode}
             disabled={loading}>
             {isLogin ? "Register" : "Login"}
           </button>
         </p>
-      </form>
+      </div>
     </div>
-  );
+  </form>
+</div>
+
+);
+
 };
 
 export default AuthForm;

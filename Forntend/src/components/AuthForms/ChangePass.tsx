@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { useAuth } from "../../context/AuthContext";
 import { API_BASE_URL } from "../../services/api";
+import "./Auth.scss";
 
 interface changePasswordData {
   username: string;
@@ -136,14 +137,16 @@ const PasswordForm: React.FC = () => {
             minLength={6}
           />
         </div>
-
+       <div className="form-actions mt-3 d-flex justify-content-center gap-3">
         <button
           type="submit"
           disabled={loading}
-          className={"submit-button" + (loading ? "loading" : "")}
+          className={"login-button" + (loading ? "loading" : "")}
         >
           {loading ? "Changing..." : "Change Password"}
         </button>
+        </div>
+        
       </form>
     </div>
   );

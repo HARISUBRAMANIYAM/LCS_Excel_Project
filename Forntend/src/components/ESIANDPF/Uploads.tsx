@@ -485,6 +485,7 @@ import { useAuth } from "../../context/AuthContext";
 import api from "../../services/api";
 import type { FileProcessResult } from "../../types";
 import { ESIINSTRCTIONS, PFINSTRCTIONS } from "./instruction";
+import "./upload.scss";
 
 type UploadType = "pf" | "esi" | "both";
 
@@ -501,7 +502,7 @@ const ExcelUpload = () => {
   const [pfResult, setPfResult] = useState<any>(null);
   const [esiResult, setEsiResult] = useState<any>(null);
   const [showInstructions] = useState(true);
-
+const fileInputRef = useRef<HTMLInputElement>(null);
   const { token } = useAuth();
   const toast = useRef<Toast>(null);
   const fileUploadRef = useRef<FileUpload>(null);
@@ -555,6 +556,9 @@ const ExcelUpload = () => {
     setEsiResult(null);
     fileUploadRef.current?.clear();
     showToast("info", "Form Reset", "Upload form reset successfully");
+     if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   const handleFileSelection = (event: any) => {
@@ -806,7 +810,7 @@ const ExcelUpload = () => {
             </div>
 
             {/* File Upload */}
-            <div className="form-group full-width">
+            {/* <div className="form-group full-width">
               <label>Select Folder ({files.length} files selected)</label>
               <FileUpload
                 ref={fileUploadRef}
@@ -834,8 +838,41 @@ const ExcelUpload = () => {
               {formik.errors.folderName && formik.touched.folderName && (
                 <Message severity="error" text={formik.errors.folderName} />
               )}
-            </div>
+            </div> */}
+            <div className="form-group full-width">
+              <label data-file-count={`${files.length} files selected`}>
+                Select Folder
+              </label>
 
+              <div className="file-upload-wrapper">
+                <div className="file-upload-empty">
+                  <i className="pi pi-folder-open"></i>
+                  <p>Drag and drop folder here or click to select</p>
+                </div>
+
+                <input
+                  type="file"
+                  // @ts-ignore - webkitdirectory is not in standard TypeScript yet
+                  webkitdirectory="true"
+                  directory="true"
+                  placeholder="Upload File"
+                  onChange={handleFileSelection}
+                  ref={fileInputRef}
+                />
+              </div>
+
+              {formik.values.folderName && (
+                <small className="folder-info">
+                  Selected folder: {formik.values.folderName}
+                </small>
+              )}
+
+              {formik.errors.folderName && formik.touched.folderName && (
+                <div className="p-message-error">
+                  {formik.errors.folderName}
+                </div>
+              )}
+            </div>
             {/* Action Buttons */}
             <div className="form-actions">
               <Button
