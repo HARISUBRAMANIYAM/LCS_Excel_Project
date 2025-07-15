@@ -3,12 +3,11 @@ import { toast, ToastContainer } from "react-toastify";
 import { useAuth } from "../../context/AuthContext";
 import { API_BASE_URL } from "../../services/api";
 import type { changePasswordData } from "../../interface/AuthFormModule";
-import { useTheme } from "../Theme/ThemeContext";
 
 
 const PasswordForm: React.FC = () => {
   const { token, logout } = useAuth();
-  const { theme } = useTheme();
+  // const { theme } = useTheme();
   const [formData, setFormData] = useState<changePasswordData>({
     username: "",
     current_password: "",
@@ -88,9 +87,9 @@ const PasswordForm: React.FC = () => {
       });
   }
   return (
-    <div className={`auth-form-container ${theme}`}>
+    <div className='auth-form-container'>
       <ToastContainer position="top-right" />
-      {/* <h2>Change Password</h2> */}
+      <h2>Change Password</h2>
       <form onSubmit={handleSubmit} className="auth-form">
         {error && <div className="error-message">{error}</div>}
         <div className="form-group">

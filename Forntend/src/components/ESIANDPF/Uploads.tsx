@@ -20,10 +20,10 @@ import type { FormValues } from "../../interface/ESIandPFModule";
 
 const ExcelUpload = () => {
   const [processing, setProcessing] = useState(false);
-  const [result, setResult] = useState<FileProcessResult | null>(null);
+  const [_result, setResult] = useState<FileProcessResult | null>(null);
   const [files, setFiles] = useState<File[]>([]);
-  const [pfResult, setPfResult] = useState<any>(null);
-  const [esiResult, setEsiResult] = useState<any>(null);
+  const [_pfResult, setPfResult] = useState<any>(null);
+  const [_esiResult, setEsiResult] = useState<any>(null);
   const [showInstructions] = useState(true);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { token } = useAuth();

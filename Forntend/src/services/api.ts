@@ -3,7 +3,7 @@ import type { AxiosInstance } from 'axios';
 import axios, { AxiosError, AxiosHeaders, } from 'axios';
 // ...existing code...
 
-export const API_BASE_URL = 'http://127.0.0.1:8000/'//http://192.168.10.165:8000/'; 'http://192.168.10.165:8000/'
+export const API_BASE_URL = 'http://192.168.10.14:7056'
 
 let isRefreshing = false;
 let failedRequestsQueue: Array<{
@@ -56,7 +56,7 @@ api.interceptors.response.use(
           failedRequestsQueue.forEach(request => request.reject(axiosError));
           localStorage.removeItem('token');
           localStorage.removeItem('refreshToken');
-          window.location.href = 'auth/login';
+          window.location.href = '/login';
           return Promise.reject(refreshError);
         } finally {
           isRefreshing = false;

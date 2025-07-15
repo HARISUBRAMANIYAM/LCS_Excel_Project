@@ -647,7 +647,7 @@ background-color: var(--bg-muted);
   max-width: 500px;
   margin: 0 auto;
   background: var(--bg-surface);
-  background-color: var(--bg-muted);
+  // background-color: var(--bg-muted);
   padding: 2rem;
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-md);
@@ -796,7 +796,7 @@ background-color: var(--bg-muted);
   margin: 2rem auto;
   padding: 2.5rem;
   background: var(--bg-surface);
-  background-color: var(--bg-muted);
+  // background-color: var(--bg-muted);
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-md);
   transition: all var(--transition-normal);
@@ -1132,4 +1132,55 @@ button.p-datepicker-trigger.p-button.p-component {
     padding: 1.5rem;
     box-shadow: var(--shadow-sm);
   }
+}
+
+.app-container {
+  background-color: var(--bg-muted);
+  color: var(--text-primary);
+  min-height: 100vh;
+  transition: all var(--transition-normal);
+}
+
+/* Theme-aware highlight styles */
+.p-button.p-highlight {
+  background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+  color: var(--color-white);
+  border: none;
+  transition: all var(--transition-fast);
+}
+
+.p-button.p-highlight:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+.p-button:not(.p-highlight) {
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+
+.theme-toggle-button {
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+  color: var(--color-white);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.theme-toggle-button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  opacity: 0.9;
+}
+
+.theme-toggle-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
 }

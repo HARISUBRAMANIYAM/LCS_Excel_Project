@@ -28,7 +28,7 @@ const RemittanceFilesList: React.FC = () => {
   const { token, user } = useAuth();
   const [files, setFiles] = useState<RemittanceFile[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [_error, setError] = useState("");
   const [downloading, setDownloading] = useState<string | null>(null);
   const [selectedFiles, setSelectedFiles] = useState<RemittanceFile[]>([]);
   const [globalFilter, setGlobalFilter] = useState("");
@@ -44,7 +44,7 @@ const RemittanceFilesList: React.FC = () => {
 
   // Current date setup
   const currentDate = new Date();
-  const currentYearMonth = currentDate.toISOString().slice(0, 7);
+  // const currentYearMonth = currentDate.toISOString().slice(0, 7);
 
   // Filter form validation
   const filterValidationSchema = Yup.object({
@@ -176,11 +176,11 @@ const RemittanceFilesList: React.FC = () => {
         }));
 
         setFiles(filesWithType);
-        showToast(
-          "success",
-          "Success",
-          `${currentFilters.fileType.toUpperCase()} files loaded successfully`
-        );
+        // showToast(
+        //   "success",
+        //   "Success",
+        //   `${currentFilters.fileType.toUpperCase()} files loaded successfully`
+        // );
         setSelectedFiles([]);
       } catch (err) {
         const errorMessage =

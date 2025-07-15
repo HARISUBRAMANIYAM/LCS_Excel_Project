@@ -1,7 +1,7 @@
 // src/contexts/ThemeProvider.tsx
 import React, { useState, useEffect } from 'react';
-import { ThemeContext, lightTheme, darkTheme } from './ThemeContext';
-import type { Theme } from './ThemeContext';
+import { ThemeContext, lightTheme, darkTheme } from '../../interface/ThemeContext';
+import type { Theme } from '../../interface/ThemeContext';
 
 
 interface ThemeProviderProps {

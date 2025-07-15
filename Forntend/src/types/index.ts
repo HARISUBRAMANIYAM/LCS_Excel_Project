@@ -1,12 +1,3 @@
-// src/types/index.ts
-
-
-// export const enum Role {
-//   Select = "",
-//   USER = "user",
-//   HR = "hr",
-//   ADMIN = "admin"
-// }
 export type Role = "user" | "hr" | "admin" | "";
 export const Role = {
     Select: "",

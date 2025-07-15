@@ -145,10 +145,10 @@ const SubmissionTimeline: React.FC<SubmissionTimelineProps> = ({ year }) => {
     `${view.toUpperCase()} Submission`,
     view === 'pf' ? '#8884d8' : '#82ca9d'
   );
-  const handleViewChange = (e: SelectButtonChangeEvent): void => {
-    console.log(e.value)
-    setView(e.value);
-  };
+  // const handleViewChange = (e: SelectButtonChangeEvent): void => {
+  //   console.log(e.value)
+  //   setView(e.value);
+  // };
   return (
     <div className="submission-timeline">
       <div className="row mb-3">

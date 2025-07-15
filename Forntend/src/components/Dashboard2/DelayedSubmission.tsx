@@ -5,7 +5,7 @@ import { SelectButton } from 'primereact/selectbutton';
 import { Message } from 'primereact/message';
 import { Skeleton } from 'primereact/skeleton';
 import api from '../../services/api';
-import type { DelayedDataPoint, DelayedSubmissionModeResponse, DelayedSubmissionsProps, DelayEntry, SelectButtonChangeEvent } from '../../interface/DashboardModule';
+import type { DelayedDataPoint, DelayedSubmissionModeResponse, DelayedSubmissionsProps, DelayEntry} from '../../interface/DashboardModule';
 import { viewOptions } from '../../interface/DashboardModule';
 
 const DelayedSubmissions: React.FC<DelayedSubmissionsProps> = ({ year }) => {
@@ -136,9 +136,9 @@ const DelayedSubmissions: React.FC<DelayedSubmissionsProps> = ({ year }) => {
 
   const currentData = formatDataForChart(data, view);
   const chartData = getChartData(data, view);
-  const handleViewChange = (e: SelectButtonChangeEvent): void => {
-    setView(e.value);
-  };
+  // const handleViewChange = (e: SelectButtonChangeEvent): void => {
+  //   setView(e.value);
+  // };
   return (
     <div className="delayed-submissions">
       <div className="row mb-3">
